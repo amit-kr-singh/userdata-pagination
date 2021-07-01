@@ -1,26 +1,27 @@
 <template>
   <div class="container">
     <div class="row no-gutters justify-content-center">
-      <h2 class="text-primary">List Of Users</h2>
-      <div class="overflow-auto">
-        <b-pagination
+      <div class="col-lg-12 col-md-12 main-table">
+        <h2 class="text-primary">List Of Users</h2>
+        <p class="mt-3">Current Page: {{ currentPage }}</p>
+        <div class="border user-data row no-gutters" id="my-table" v-for="(item, index) in userList" :per-page="perPage" :current-page="currentPage" small :key="index">
+            <div class="col-md-4">
+              <img class="user-image" :src="item.avatar" />
+            </div>
+            <div class="col-md-4 user-style text-left">
+              {{item.first_name}} {{item.last_name}}
+            </div>
+            <div class="col user-style text-left">
+              {{item.email}}
+            </div>
+        </div>
+          <b-pagination
           v-model="currentPage"
           :total-rows="rows"
           :per-page="perPage"
           aria-controls="my-table"
           @input="changPage($event)"
         ></b-pagination>
-
-        <p class="mt-3">Current Page: {{ currentPage }}</p>
-
-        <b-table
-          id="my-table"
-          :items="userList"
-          :per-page="perPage"
-          :current-page="currentPage"
-          small
-        ></b-table>
-          <!-- ref="table" -->
       </div>
     </div>
   </div>
@@ -79,4 +80,26 @@ export default {
 </script>
 
 <style>
+ .user-data { 
+   padding: 10px;
+ }
+ .user-image {
+   height: 77px;
+   border-radius: 50%;
+ }
+ .user-style {
+   margin-top: auto;
+   margin-bottom: auto;
+ }
+ .main-table{
+    max-width: 70%;
+    text-align: center;
+    justify-content: center;
+    margin: auto;
+    box-shadow: 0px 30px 30px 0px rgb(0 11 40 / 10%);
+    margin-bottom: 40px;
+ }
+ .pagination{
+   justify-content: inherit;
+ }
 </style>
